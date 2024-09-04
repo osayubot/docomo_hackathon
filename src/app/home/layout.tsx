@@ -1,10 +1,10 @@
-import NavigationBar from "@/components/NavigationBar";
+import NavigationTab from "./NavigationTab";
 import { Container } from "@chakra-ui/react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <NavigationBar />
+      <NavigationTab />
       <Container>{children}</Container>
     </>
   );

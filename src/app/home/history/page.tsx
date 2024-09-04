@@ -1,8 +1,7 @@
 "use client";
-import NavigationBar from "@/components/NavigationBar";
 import { Container } from "@chakra-ui/react";
 
 const Page = () => {
-  return <Container>order</Container>;
+  return <Container>過去の商品のページ</Container>;
 };
 export default Page;
