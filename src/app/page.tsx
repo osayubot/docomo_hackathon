@@ -2,6 +2,8 @@
 import CustomCard from "@/components/CustomCard";
 import ItemCard from "@/components/ItemCard";
 import Navbar from "@/components/Navbar";
+import NavigationBar from "@/components/NavigationBar";
+
 import {
   Container,
   FormControl,
@@ -33,6 +35,7 @@ const Page = () => {
   };
   return (
     <Container>
+      <NavigationBar pathname="/" />
       <CustomCard
         title="毎月のサプライズで、生活に新たな発見を。"
         description="何が届くかわからない楽しみを、生活にプラス。プロジェクターから美顔器まで、多彩なアイテムであなたのライフスタイルをアップデート。"
