@@ -1,6 +1,4 @@
 "use client";
-import CustomCard from "@/components/CustomCard";
-import { Link } from "@chakra-ui/next-js";
 import {
   Container,
   FormControl,
