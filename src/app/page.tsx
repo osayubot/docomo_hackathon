@@ -1,5 +1,6 @@
 "use client";
 import CustomCard from "@/components/CustomCard";
+import ItemCard from "@/components/ItemCard";
 import Navbar from "@/components/Navbar";
 import {
   Container,
@@ -12,9 +13,24 @@ import {
   Image,
   Button,
   Center,
+  RadioGroup,
+  HStack,
+  Radio,
 } from "@chakra-ui/react";
+import { useState } from "react";
+
+type GachaItem = {
+  name: string;
+  id: string;
+};
 
 const Page = () => {
+  const [items, setItems] = useState<GachaItem[]>([]);
+  const handleGacha = () => {
+    // この中でガチャの処理
+    const sampleItems = [{ name: "hogehoge", id: "hogehoge" }];
+    setItems(sampleItems);
+  };
   return (
     <Container>
       <CustomCard
@@ -27,20 +43,15 @@ const Page = () => {
       />
 
       <Container bgColor={"#D9D9D9"} p={4} borderRadius={"20px"}>
-        <FormControl>
-          <FormLabel>性別</FormLabel>
-          <Input type="email" />
-          <FormHelperText></FormHelperText>
-        </FormControl>
-        <FormControl>
-          <FormLabel>年齢</FormLabel>
-          <Input type="email" />
-          <FormHelperText></FormHelperText>
-        </FormControl>
         <Center>
-          <Button mx="auto">ガチャをする</Button>
+          <Button mx="auto" onClick={handleGacha}>
+            ガチャをする
+          </Button>
         </Center>
       </Container>
+      {items.map((item) => {
+        return <ItemCard key={item.id} name={item.name} />;
+      })}
     </Container>
   );
 };
