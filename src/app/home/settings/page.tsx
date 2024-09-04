@@ -1,8 +1,7 @@
 "use client";
-import NavigationBar from "@/components/NavigationBar";
 import { Container } from "@chakra-ui/react";
 
 const Page = () => {
-  return <Container>history</Container>;
+  return <Container>個人情報設定のページ</Container>;
 };
 export default Page;

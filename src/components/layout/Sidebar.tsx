@@ -8,6 +8,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 const Sidebar = ({
   onClose,
@@ -16,6 +18,10 @@ const Sidebar = ({
   onClose: () => void;
   isOpen: boolean;
 }) => {
+  const pathname = usePathname();
+  useEffect(() => {
+    onClose();
+  }, [pathname]);
   return (
     <Drawer onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />
