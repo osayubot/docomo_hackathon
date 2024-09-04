@@ -1,6 +1,7 @@
-import Footer from "@/components/Footer";
+import Footer from "@/components/layout/Footer";
 import { Providers } from "./providers";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
+import NextAuthProvider from "@/libs/NextAuthProvider";
 
 export default function RootLayout({
   children,
@@ -9,13 +10,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Providers>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </Providers>
-      </body>
+      <NextAuthProvider>
+        <body>
+          <Providers>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </Providers>
+        </body>
+      </NextAuthProvider>
     </html>
   );
 }
