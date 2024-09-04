@@ -36,7 +36,7 @@ const GachaModal = ({
     <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
       <ModalOverlay />
       <ModalContent maxW={"2xl"}>
-        <ModalHeader>Modal Title</ModalHeader>
+        <ModalHeader>お試しガチャ</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Container bgColor={"#D9D9D9"} p={4} borderRadius={"20px"}>
