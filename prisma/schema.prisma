@@ -13,11 +13,48 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+// model User {
+//    id        Int      @id @unique @default(autoincrement())
+//    createdAt DateTime @default(now())
+//    updatedAt DateTime @updatedAt
+//    isAdmin   Boolean @default(false)
+//}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+model USER {
   id        Int      @id @unique @default(autoincrement())
+  name      String   @db.VarChar(256)
+  age       Int
+  gender    Gender
+  birth     DateTime
+  email     String  @db.VarChar(256) @unique
+  password  String  @db.VarChar(256)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  isAdmin Boolean @default(false)
 }
 
+model ITEM {
+  id        Int      @id @unique @default(autoincrement())
+  name      String   @db.VarChar(256)
+  category  String   @db.VarChar(128)
+  url       String   @db.VarChar(512)
+  imageUrl  String   @db.VarChar(512)
+  initialPrice　Decimal  @db.Decimal(10, 2)
+  monthlyPrice  Decimal  @db.Decimal(10, 2)
+  overview  String   @db.Text
+  detail    String   @db.Text
+}
+
+// orderのステータス管理はisreturnedだけでいい？
+// userIdとitemIdはrelationを宣言する必要ある？
+model ORDER {
+  orderid   Int      @id @unique @default(autoincrement())
+  userId    Int
+  itemID    Int
+  orderAt   DateTime
+  idReturned Boolean   @default(false)
+}
