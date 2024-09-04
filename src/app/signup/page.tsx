@@ -1,11 +1,25 @@
 "use client";
 import { useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { validationRegistSchema } from "@/libs/validationSchema";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+import Image from "next/image";
 
 interface Error {
   email: [];
@@ -16,7 +30,7 @@ interface Error {
 const Page = () => {
   const { data: session, status } = useSession();
   const [resError, setResError] = useState<Error>();
-
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -32,18 +46,16 @@ const Page = () => {
 
   //登録処理
   const handleRegist = async (data: any) => {
-    //フォーム取得
     const email = data.email;
     const password = data.password;
     const res = await fetch("/api/signUp", {
       body: JSON.stringify(data),
-      headers: {
-        "Content-type": "application/json",
-      },
+      headers: { "Content-type": "application/json" },
       method: "POST",
     });
     if (res.ok) {
       signIn("credentials", { email: email, password: password });
+      router.push("/home");
     } else {
       const resError = await res.json();
       setResError(resError.errors);
@@ -51,70 +63,57 @@ const Page = () => {
   };
   return (
     <>
-      <div className="flex flex-col w-full h-screen text-sm items-center justify-center">
-        <div className="flex flex-col items-center justify-center p-10 border-2 rounded-2xl">
-          <p className="text-2xl font-bold mb-5">アカウント登録</p>
-          <form
-            onSubmit={handleSubmit(handleRegist)}
-            className="flex flex-col items-center"
-          >
-            <label htmlFor="email">
-              <p>メールアドレス</p>
-              <input
-                type="text"
-                id="email"
-                {...register("email")}
-                className=" border-2 w-[300px] h-[35px] px-2 mb-2"
-              />
-              <div className="text-xs font-bold text-red-400 mb-2">
-                {errors.email?.message as React.ReactNode}
-                {resError?.email?.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            </label>
-            <label htmlFor="password">
-              <p>パスワード</p>
-              <input
-                type="password"
-                id="password"
-                {...register("password")}
-                className=" border-2 w-[300px] h-[35px] px-2 mb-2"
-              />
-              <div className="text-xs font-bold text-red-400 mb-2">
-                {errors.password?.message as React.ReactNode}
-                {resError?.password?.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            </label>
-            <label htmlFor="passwordConfirm">
-              <p>再確認パスワード</p>
-              <input
-                type="password"
-                id="passwordConfirm"
-                {...register("passwordConfirm")}
-                className=" border-2 w-[300px] h-[35px] px-2 mb-2"
-              />
-              <div className="text-xs font-bold text-red-400 mb-2">
-                {errors.passwordConfirm?.message as React.ReactNode}
-                {resError?.passwordConfirm?.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            </label>
-            <button
-              type="submit"
-              className="text-white bg-gray-700 w-[300px] h-[35px] my-2"
-            >
-              登録
-            </button>
-          </form>
-          <Link href="/signin" className="mt-2">
-            ログインはこちら
-          </Link>
-        </div>
-      </div>
+      <Flex minH={"100vh"} justify={"center"} bg={"gray.50"}>
+        <Stack spacing={8} py={12} px={6} width={"100%"} maxW={"md"}>
+          <Stack align={"center"}>
+            <Heading fontSize={"4xl"}>新規登録</Heading>
+          </Stack>
+          <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8} minW={360}>
+            <Stack spacing={4}>
+              <form onSubmit={handleSubmit(handleRegist)}>
+                <Stack spacing={4}>
+                  <FormControl id="email">
+                    <FormLabel>メールアドレス</FormLabel>
+                    <Input
+                      type="email"
+                      id="email"
+                      {...register("email")}
+                      placeholder="sample@sample.com"
+                    />
+                    <FormHelperText>
+                      {errors.email?.message as React.ReactNode}
+                    </FormHelperText>
+                  </FormControl>
+                  <FormControl id="password">
+                    <FormLabel>パスワード</FormLabel>
+                    <Input
+                      type="password"
+                      id="password"
+                      {...register("password")}
+                      placeholder="********"
+                    />
+                    <FormHelperText>
+                      {errors.password?.message as React.ReactNode}
+                    </FormHelperText>
+                  </FormControl>
+                  <Button type="submit" colorScheme="blue">
+                    登録
+                  </Button>
+                  <Text colorScheme="red">{resError as React.ReactNode}</Text>
+                </Stack>
+              </form>
+              <Center>
+                <Link href="/signin" style={{ textDecoration: "underline" }}>
+                  ログインはこちら
+                </Link>
+              </Center>
+            </Stack>
+          </Box>
+          {/*<Button colorScheme="blue" onClick={() => signIn("google")}>
+            Googleでログイン
+          </Button>*/}
+        </Stack>
+      </Flex>
     </>
   );
 };
