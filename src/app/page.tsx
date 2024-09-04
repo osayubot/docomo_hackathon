@@ -1,22 +1,9 @@
 "use client";
 import CustomCard from "@/components/CustomCard";
 import ItemCard from "@/components/ItemCard";
-import Navbar from "@/components/Navbar";
-import {
-  Container,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Heading,
-  Icon,
-  Input,
-  Image,
-  Button,
-  Center,
-  RadioGroup,
-  HStack,
-  Radio,
-} from "@chakra-ui/react";
+import NavigationBar from "@/components/NavigationBar";
+
+import { Container, Button, Center } from "@chakra-ui/react";
 import { useState } from "react";
 
 type GachaItem = {
@@ -33,6 +20,7 @@ const Page = () => {
   };
   return (
     <Container>
+      <NavigationBar pathname="/" />
       <CustomCard
         title="毎月のサプライズで、生活に新たな発見を。"
         description="何が届くかわからない楽しみを、生活にプラス。プロジェクターから美顔器まで、多彩なアイテムであなたのライフスタイルをアップデート。"

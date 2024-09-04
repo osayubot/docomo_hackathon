@@ -1,4 +1,5 @@
 "use client";
+import NavigationBar from "@/components/NavigationBar";
 import {
   Container,
   FormControl,
@@ -10,6 +11,10 @@ import {
 } from "@chakra-ui/react";
 
 const Page = () => {
-  return <Container></Container>;
+  return (
+    <Container>
+      <NavigationBar pathname="/settings" />
+    </Container>
+  );
 };
 export default Page;
