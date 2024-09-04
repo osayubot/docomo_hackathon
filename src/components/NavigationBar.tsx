@@ -1,45 +1,39 @@
-import { Tab, TabList, Tabs, Link } from "@chakra-ui/react";
+"use client";
+import { Tab, TabList, Tabs } from "@chakra-ui/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+const NavigationBar = () => {
+  const pathname = usePathname();
 
-const NavigationBar = ({ pathname }: { pathname: string }) => {
-  const defaultIndex = () => {
-    if (pathname === "/") {
-      return 0;
-    } else if (pathname === "/history") {
-      return 1;
-    } else if (pathname === "/settings") {
-      return 2;
-    } else {
-      return 0;
-    }
-  };
+  const getTabIndex = useCallback(() => {}, []);
+
+  useEffect(() => {
+    const newTabIndex =
+      pathname === "/detail/order"
+        ? 0
+        : pathname === "/detail/history"
+        ? 1
+        : pathname === "/detail/settings"
+        ? 2
+        : -1;
+
+    setTabIndex(newTabIndex);
+  }, [pathname]);
+
+  const [tabIndex, setTabIndex] = useState<number>(-1);
 
   return (
-    <Tabs isFitted variant="enclosed" defaultIndex={defaultIndex()}>
+    <Tabs isFitted variant="enclosed" defaultIndex={tabIndex}>
       <TabList mb="1em">
-        <Tab cursor={"pointer"}>
-          <Link href="/" display={"block"} width={"100%"} height={"100%"}>
-            今月の商品
-          </Link>
+        <Tab cursor={"pointer"} as={Link} href="/detail/order">
+          今月の商品
         </Tab>
-        <Tab cursor={"pointer"}>
-          <Link
-            href="/history"
-            display={"block"}
-            width={"100%"}
-            height={"100%"}
-          >
-            過去の商品
-          </Link>
+        <Tab cursor={"pointer"} as={Link} href="/detail/history">
+          過去の商品
         </Tab>
-        <Tab cursor={"pointer"}>
-          <Link
-            href="/settings"
-            display={"block"}
-            width={"100%"}
-            height={"100%"}
-          >
-            個人情報設定
-          </Link>
+        <Tab cursor={"pointer"} as={Link} href="/detail/settings">
+          <Link href="/detail/settings">個人情報設定</Link>
         </Tab>
       </TabList>
     </Tabs>
