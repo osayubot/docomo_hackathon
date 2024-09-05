@@ -3,23 +3,18 @@ import { useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { validationRegistSchema } from "@/libs/validationSchema";
 import {
   Box,
   Button,
   Center,
   Flex,
   FormControl,
-  FormHelperText,
   FormLabel,
   Heading,
   Input,
   Stack,
   Text,
 } from "@chakra-ui/react";
-import Image from "next/image";
 
 interface Error {
   email: [];
@@ -29,27 +24,19 @@ interface Error {
 
 const Page = () => {
   const { data: session, status } = useSession();
-  const [resError, setResError] = useState<Error>();
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    formState: { errors },
-  } = useForm({
-    mode: "onChange",
-    resolver: zodResolver(validationRegistSchema),
-  });
 
+  // react-hook-formなんか使えないし時間ないので直書きで...
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
   //セッション判定
   if (session) redirect("/");
 
   //登録処理
-  const handleRegist = async (data: any) => {
-    const email = data.email;
-    const password = data.password;
+  const onSubmit = async () => {
     const res = await fetch("/api/signUp", {
-      body: JSON.stringify(data),
+      body: JSON.stringify({ email, password }),
       headers: { "Content-type": "application/json" },
       method: "POST",
     });
@@ -58,7 +45,7 @@ const Page = () => {
       router.push("/home");
     } else {
       const resError = await res.json();
-      setResError(resError.errors);
+      setError(resError.errors);
     }
   };
   return (
@@ -70,38 +57,31 @@ const Page = () => {
           </Stack>
           <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8} minW={360}>
             <Stack spacing={4}>
-              <form onSubmit={handleSubmit(handleRegist)}>
-                <Stack spacing={4}>
-                  <FormControl id="email">
-                    <FormLabel>メールアドレス</FormLabel>
-                    <Input
-                      type="email"
-                      id="email"
-                      {...register("email")}
-                      placeholder="sample@sample.com"
-                    />
-                    <FormHelperText>
-                      {errors.email?.message as React.ReactNode}
-                    </FormHelperText>
-                  </FormControl>
-                  <FormControl id="password">
-                    <FormLabel>パスワード</FormLabel>
-                    <Input
-                      type="password"
-                      id="password"
-                      {...register("password")}
-                      placeholder="********"
-                    />
-                    <FormHelperText>
-                      {errors.password?.message as React.ReactNode}
-                    </FormHelperText>
-                  </FormControl>
-                  <Button type="submit" colorScheme="blue">
-                    登録
-                  </Button>
-                  <Text colorScheme="red">{resError as React.ReactNode}</Text>
-                </Stack>
-              </form>
+              <Stack spacing={4}>
+                <FormControl id="email">
+                  <FormLabel>メールアドレス</FormLabel>
+                  <Input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="sample@sample.com"
+                  />
+                </FormControl>
+                <FormControl id="password">
+                  <FormLabel>パスワード</FormLabel>
+                  <Input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="********"
+                  />
+                </FormControl>
+                <Button colorScheme="blue" onClick={onSubmit}>
+                  登録
+                </Button>
+                <Text>{error}</Text>
+              </Stack>
               <Center>
                 <Link href="/signin" style={{ textDecoration: "underline" }}>
                   ログインはこちら

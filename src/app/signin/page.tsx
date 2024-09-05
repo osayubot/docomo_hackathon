@@ -16,28 +16,22 @@ import {
   Button,
   Heading,
   Text,
-  useColorModeValue,
   FormHelperText,
   Center,
 } from "@chakra-ui/react";
 
 const Page = () => {
   const { data: session, status } = useSession();
-  const [resError, setResError] = useState<Error>();
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    formState: { errors },
-  } = useForm({
-    mode: "onChange",
-    resolver: zodResolver(validationLoginSchema),
-  });
+
+  // react-hook-formなんか使えないし時間ないので直書きで...
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   //セッション判定
   if (session) redirect("/");
 
-  const handleLogin = async (data: any) => {
+  const onSubmit = async (data: any) => {
     const email = data.email;
     const password = data.password;
     const res = await fetch("/api/signIn", {
@@ -49,7 +43,7 @@ const Page = () => {
       signIn("credentials", { email: email, password: password });
     } else {
       const resError = await res.json();
-      setResError(resError.errors);
+      setError(resError.errors);
     }
   };
   return (
@@ -61,38 +55,32 @@ const Page = () => {
           </Stack>
           <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8} minW={360}>
             <Stack spacing={4}>
-              <form onSubmit={handleSubmit(handleLogin)}>
-                <Stack spacing={4}>
-                  <FormControl id="email">
-                    <FormLabel>メールアドレス</FormLabel>
-                    <Input
-                      type="email"
-                      id="email"
-                      {...register("email")}
-                      placeholder="sample@sample.com"
-                    />
-                    <FormHelperText>
-                      {errors.email?.message as React.ReactNode}
-                    </FormHelperText>
-                  </FormControl>
-                  <FormControl id="password">
-                    <FormLabel>パスワード</FormLabel>
-                    <Input
-                      type="password"
-                      id="password"
-                      {...register("password")}
-                      placeholder="********"
-                    />
-                    <FormHelperText>
-                      {errors.password?.message as React.ReactNode}
-                    </FormHelperText>
-                  </FormControl>
-                  <Button type="submit" colorScheme="red">
-                    ログイン
-                  </Button>
-                  <Text colorScheme="red">{resError as React.ReactNode}</Text>
-                </Stack>
-              </form>
+              <Stack spacing={4}>
+                <FormControl id="email">
+                  <FormLabel>メールアドレス</FormLabel>
+                  <Input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="sample@sample.com"
+                  />
+                </FormControl>
+                <FormControl id="password">
+                  <FormLabel>パスワード</FormLabel>
+                  <Input
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="********"
+                  />
+                </FormControl>
+                <Button colorScheme="red" onClick={onSubmit}>
+                  ログイン
+                </Button>
+                <Text colorScheme="red">{error}</Text>
+              </Stack>
               <Center>
                 <Link href="/signup" style={{ textDecoration: "underline" }}>
                   新規登録はこちら
