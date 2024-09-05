@@ -33,7 +33,7 @@ model Users {
   birth     DateTime
   email     String  @db.VarChar(256) @unique
   password  String  @db.VarChar(256)
-  orders    Order[]
+  orders    Orders[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
