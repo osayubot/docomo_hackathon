@@ -29,10 +29,10 @@ const Sidebar = ({
         <DrawerHeader borderBottomWidth="1px">メニュー</DrawerHeader>
         <DrawerBody>
           <Text my={1}>
-            <Link href="/about">kikitoの家電ガチャって何？</Link>
+            <Link href="https://www.docomo.ne.jp/service/kikito/">kikitoって何？</Link>
           </Text>
           <Text my={1}>
-            <Link href="/home">ホーム</Link>
+            <Link href="/home">どんな商品があるか</Link>
           </Text>
         </DrawerBody>
       </DrawerContent>
