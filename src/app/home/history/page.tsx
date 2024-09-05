@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Container,
+  Flex,
   Table,
   TableCaption,
   TableContainer,
@@ -85,10 +86,12 @@ const Page = () => {
         <Table variant="striped">
           <Thead>
             <Tr>
-              <Th>利用月</Th>
-              <Th width={"532px"}>商品名</Th>
-              <Th>評価</Th>
-              <Th>配送状況</Th>
+              <Th fontSize={"large"}>利用月</Th>
+              <Th width={"532px"} fontSize={"large"}>
+                商品名
+              </Th>
+              <Th fontSize={"large"}>評価</Th>
+              <Th fontSize={"large"}>配送状況</Th>
               <Th></Th>
             </Tr>
           </Thead>
@@ -97,24 +100,28 @@ const Page = () => {
               data.map((item, index) => (
                 <Tr key={index}>
                   <Td>{item.month}</Td>
-                  <Td
-                    width={"532px"}
-                    overflowWrap={"break-word"}
-                    wordBreak={"break-all"}
-                  >
-                    {item.name}
+                  <Td width={"532px"}>
+                    <Box sx={{ "text-wrap": "wrap" }}>{item.name}</Box>
                   </Td>
                   <Td>{evaluateToStar(item.evaluation)}</Td>
                   <Td>{item.status}</Td>
                   <Td>
-                    {/* 返却ボタン */}
-                    <Button
-                      colorScheme="teal"
-                      variant="solid"
-                      isDisabled={item.status !== "配送済み"}
-                    >
-                      返却
-                    </Button>
+                    <Flex flexDirection={"column"} gap={2}>
+                      <Button
+                        colorScheme="teal"
+                        variant="solid"
+                        isDisabled={item.status !== "配送済み"}
+                      >
+                        返却
+                      </Button>
+                      <Button
+                        colorScheme="yellow"
+                        variant="solid"
+                        isDisabled={item.evaluation === null}
+                      >
+                        評価
+                      </Button>
+                    </Flex>
                   </Td>
                 </Tr>
               ))}
