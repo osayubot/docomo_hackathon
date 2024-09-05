@@ -25,7 +25,7 @@ enum Gender {
   FEMALE
   OTHER
 }
-model users {
+model Users {
   id        Int      @id @unique @default(autoincrement())
   name      String   @db.VarChar(256)
   age       Int
@@ -33,11 +33,12 @@ model users {
   birth     DateTime
   email     String  @db.VarChar(256) @unique
   password  String  @db.VarChar(256)
+  orders    Order[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model items {
+model Items {
   id        Int      @id @unique @default(autoincrement())
   name      String   @db.VarChar(256)
   category  String   @db.VarChar(128)
@@ -47,14 +48,19 @@ model items {
   monthlyPrice  Decimal  @db.Decimal(10, 2)
   overview  String   @db.Text
   detail    String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // orderのステータス管理はisreturnedだけでいい？
 // userIdとitemIdはrelationを宣言する必要ある？
-model orders {
-  orderid   Int      @id @unique @default(autoincrement())
+model Orders {
+  id        Int      @id @unique @default(autoincrement())
   userId    Int
-  itemID    Int
+  itemId    Int
   orderAt   DateTime
-  idReturned Boolean   @default(false)
+  returnedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      Users     @relation(fields: [userId], references: [id])
 }
