@@ -26,6 +26,7 @@
     "openai": "^4.57.1",
     "prisma": "^5.19.1",
     "react": "^18",
+    "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
     "zod": "^3.23.8"
@@ -34,6 +35,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
+    "@types/react-anchor-link-smooth-scroll": "^1.0.5",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.7",

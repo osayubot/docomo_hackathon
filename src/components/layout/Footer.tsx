@@ -12,9 +12,11 @@ import {
   IconButton,
   useColorModeValue,
   Image,
+  Heading,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { ReactNode } from "react";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
@@ -43,7 +45,7 @@ const Footer = () => {
                 alt="kikito 家電ガチャ"
                 width={960 / 4}
                 height={230 / 4}
-                m="4px 10px"
+                m="-8px 10px"
               />
             </Link>
             <Text fontSize={"sm"} px={4} fontWeight={"bold"}>
@@ -51,23 +53,31 @@ const Footer = () => {
             </Text>
           </Stack>
           <Stack align={"flex-start"}>
-            <ListHeader>サービス概要</ListHeader>
-            <Box as="a" href={"#"}>
+            <Heading size={"md"}>サービス概要</Heading>
+            <Box as={AnchorLink} href={"#price"}>
               料金
             </Box>
-            <Box as="a" href={"#"}>
+            <Box as={AnchorLink} href={"#voice"}>
               お客様からの声
             </Box>
           </Stack>
           <Stack align={"flex-start"}>
-            <ListHeader>ご利用ガイド</ListHeader>
-            <Box as="a" href={"#"}>
+            <Heading size={"md"}>ご利用ガイド</Heading>
+            <Box
+              as="a"
+              href={"https://rental.kikito.docomo.ne.jp/portal/terms-of-use/"}
+            >
               利用規約
             </Box>
-            <Box as="a" href={"#"}>
+            <Box as="a" href={"https://www.docomo.ne.jp/utility/privacy/"}>
               プライバシーポリシー
             </Box>
-            <Box as="a" href={"#"}>
+            <Box
+              as="a"
+              href={
+                "https://rental.kikito.docomo.ne.jp/portal/commercial-transactions/"
+              }
+            >
               特定商取引法に基づく表記
             </Box>
           </Stack>

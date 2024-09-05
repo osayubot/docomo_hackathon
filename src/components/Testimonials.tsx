@@ -10,6 +10,7 @@ import {
   Avatar,
   useColorModeValue,
 } from "@chakra-ui/react";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 interface Props {
   children: React.ReactNode;
@@ -102,10 +103,12 @@ const TestimonialAvatar = ({
 
 const Testimonial = () => {
   return (
-    <Box bg={useColorModeValue("gray.100", "gray.700")}>
+    <Box bg={"gray.100"}>
       <Container maxW={"7xl"} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={"center"}>
-          <Heading>お客様の声</Heading>
+          <AnchorLink id="voice">
+            <Heading>お客様の声</Heading>
+          </AnchorLink>
           <Text my={2}>
             日々、ユーザーの皆様から嬉しいお声をいただいております！
           </Text>
