@@ -5,9 +5,14 @@ services:
       - 3307:3306
     volumes:
       - mysql:/var/lib/mysql
+      # add
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf  # カスタム設定ファイルをマウント
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=test
+    # add
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
 
 volumes:
   mysql:
