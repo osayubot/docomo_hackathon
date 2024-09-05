@@ -1,36 +1,41 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import {
   Box,
-  chakra,
   Container,
   SimpleGrid,
   Stack,
   Text,
-  VisuallyHidden,
-  Input,
-  IconButton,
-  useColorModeValue,
   Image,
   Heading,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { ReactNode } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
-const ListHeader = ({ children }: { children: ReactNode }) => {
-  return (
-    <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
-      {children}
-    </Text>
-  );
-};
-
 const Footer = () => {
+  const [isMounted, setIsMounted] = useState(false); // マウントされたかどうかを追跡
+  const [isHomePage, setIsHomePage] = useState(false); // ホームページかどうかの状態を保持
+
+  useEffect(() => {
+    setIsMounted(true); // クライアントサイドでのみマウント
+
+    if (typeof window !== "undefined") {
+      const { pathname } = window.location; // ここでURLのパスを取得
+      setIsHomePage(pathname === "/"); // ホームページかどうかを判定
+    }
+  }, []);
+
+  // クライアントサイドでのみ実行されるように制御
+  if (!isMounted) {
+    return null; // サーバーサイドでは何もレンダリングしない
+  }
+
   return (
     <Box
-      bg={useColorModeValue("gray.50", "gray.900")}
-      color={useColorModeValue("gray.700", "gray.200")}
+      bg={"gray.50"}
+      color={"gray.700"}
       mt={10}
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
@@ -52,15 +57,19 @@ const Footer = () => {
               © NTT DOCOMO Hackathon 2024
             </Text>
           </Stack>
-          <Stack align={"flex-start"}>
-            <Heading size={"md"}>サービス概要</Heading>
-            <Box as={AnchorLink} href={"#price"}>
-              料金
-            </Box>
-            <Box as={AnchorLink} href={"#voice"}>
-              お客様からの声
-            </Box>
-          </Stack>
+
+          {isHomePage && (
+            <Stack align={"flex-start"}>
+              <Heading size={"md"}>サービス概要</Heading>
+              <Box as={AnchorLink} href={"#price"}>
+                料金
+              </Box>
+              <Box as={AnchorLink} href={"#voice"}>
+                お客様からの声
+              </Box>
+            </Stack>
+          )}
+
           <Stack align={"flex-start"}>
             <Heading size={"md"}>ご利用ガイド</Heading>
             <Box
