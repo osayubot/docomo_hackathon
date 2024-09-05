@@ -47,7 +47,7 @@ return (
         <Container bgColor={"#D9D9D9"} p={4} borderRadius={"20px"}>
           <Center>
             {!isPlayingVideo && !showItem && (
-              <Button mx="auto" onClick={handleGacha}>
+              <Button mx="auto" onClick={handleGacha} bgColor="#D9D9D9" color="black" _hover={{ bgColor: "#D9D9D9" }}>
                 ガチャをする
               </Button>
             )}
