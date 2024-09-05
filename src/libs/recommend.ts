@@ -49,7 +49,7 @@ const fetchRecommendCategory = async ({
   // このカテゴリをもとに、prisma で作成した Items テーブル から、予算(budget)に一致するアイテムをとってくる
   //
 
-  const items = await prisma.item.findMany({
+  const items = await prisma.items.findMany({
       where: {
         category: category,
         initialPrice: { lte: budget },

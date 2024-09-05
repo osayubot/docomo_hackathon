@@ -44,22 +44,7 @@ model Items {
   category  String   @db.VarChar(128)
   url       String   @db.VarChar(512)
   imageUrl  String   @db.VarChar(512)
-  initialPrice  Decimal  @db.Decimal(10, 2)
-  monthlyPrice  Decimal  @db.Decimal(10, 2)
-  overview  String   @db.Text
-  detail    String   @db.Text
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-//
-model Item {
-  id        Int      @id @unique @default(autoincrement())
-  name      String   @db.VarChar(256)
-  category  String   @db.VarChar(128)
-  url       String   @db.VarChar(512)
-  imageUrl  String   @db.VarChar(512)
-  initialPrice  Decimal  @db.Decimal(10, 2)
+  initialPrice　Decimal  @db.Decimal(10, 2)
   monthlyPrice  Decimal  @db.Decimal(10, 2)
   overview  String   @db.Text
   detail    String   @db.Text
