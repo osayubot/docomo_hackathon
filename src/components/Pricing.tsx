@@ -69,9 +69,9 @@ export default function ThreeTierPricing() {
     },
   ];
   return (
-    <Box py={12}>
+    <Box pt={12}>
       <VStack spacing={2} textAlign="center">
-        <Heading as="h1" fontSize="4xl">
+        <Heading as="h1" fontSize="4xl" id="price">
           お好きな価格から始められます
         </Heading>
         <Text fontSize="lg" color={"gray.500"}>
