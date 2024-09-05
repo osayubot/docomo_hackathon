@@ -1,3 +1,7 @@
+import { Prisma } from "@prisma/client";
+import { PrismaClientInitializationError } from "@prisma/client/runtime/library";
+import prisma from "@/libs/Prisma";
+
 type Category =
   | "カメラ"
   | "XRデバイス"
@@ -44,6 +48,17 @@ const fetchRecommendCategory = async ({
 
   // このカテゴリをもとに、prisma で作成した Items テーブル から、予算(budget)に一致するアイテムをとってくる
   //
+
+  const items = await prisma.item.findMany({
+      where: {
+        category: category,
+        initialPrice: { lte: budget },
+      },
+      orderBy: {
+        initialPrice: "asc",
+      },
+  });
+
   return {
     name: "",
     category,
