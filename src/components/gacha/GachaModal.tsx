@@ -14,25 +14,12 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import Link from "next/link";
 
 type GachaItem = {
   name: string;
   id: string;
 };
-
-// const GachaModal = ({
-//   isOpen,
-//   onClose,
-// }: {
-//   isOpen: boolean;
-//   onClose: () => void;
-// }) => {
-//   const [items, setItems] = useState<GachaItem[]>([]);
-//   const handleGacha = () => {
-//     // この中でガチャの処理
-//     const sampleItems = [{ name: "hogehoge", id: "hogehoge" }];
-//     setItems(sampleItems);
-//   };
 
 const GachaModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [isPlayingVideo, setIsPlayingVideo] = useState<boolean>(false); // 動画再生中かどうか
@@ -40,50 +27,15 @@ const GachaModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
   const [items, setItems] = useState<{ name: string; id: string }[]>([]); // ガチャアイテム
 
   const handleGacha = () => {
-    setIsPlayingVideo(true); // 動画を再生開始
-    setShowItem(false); // アイテムを非表示にして動画再生
+    setIsPlayingVideo(true);
+    setShowItem(false); 
     setTimeout(() => {
-      setIsPlayingVideo(false); // 動画が終了したとみなす
+      setIsPlayingVideo(false);
       const sampleItems = [{ name: "hogehoge", id: "hogehoge" }]; // ガチャ結果
       setItems(sampleItems);
-      setShowItem(true); // アイテムを表示
-    }, 20000); // 20秒後に画像を表示
+      setShowItem(true);
+    }, 20000);
   };
-
-//   return (
-//     <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
-//       <ModalOverlay />
-//       <ModalContent maxW={"2xl"}>
-//         <ModalHeader>お試しガチャ</ModalHeader>
-//         <ModalCloseButton />
-//         <ModalBody>
-//           <Container bgColor={"#D9D9D9"} p={4} borderRadius={"20px"}>
-//             <Center>
-//               <Button mx="auto" onClick={handleGacha}>
-//                 ガチャをする
-//               </Button>
-//             </Center>
-//           </Container>
-//           {items.map((item) => {
-//             return <ItemCard key={item.id} name={item.name} />;
-//           })}
-//         </ModalBody>
-
-//         {items.length > 0 && (
-//           <ModalFooter flexDir={"column"}>
-//             <Button colorScheme="blue" w={"full"} onClick={() => setItems([])}>
-//               もう一度
-//             </Button>
-//             <Button w={"full"}>サブスクする</Button>
-//           </ModalFooter>
-//         )}
-//       </ModalContent>
-//     </Modal>
-//   );
-// };
-// export default GachaModal;
-
-
 
 return (
   <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
@@ -117,10 +69,10 @@ return (
 
       {showItem && (
         <ModalFooter flexDir={"column"}>
-          <Button colorScheme="blue" w={"full"} onClick={() => setItems([])}>
+          <Button colorScheme="blue" w={"full"} onClick={handleGacha}>
             もう一度
           </Button>
-          <Button w={"full"}>サブスクする</Button>
+          <Button w={"full"} as={Link} href="/signup">サブスクする</Button>
         </ModalFooter>
       )}
     </ModalContent>
