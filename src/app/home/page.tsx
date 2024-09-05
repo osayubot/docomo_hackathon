@@ -17,8 +17,13 @@ import Link from "next/link";
 
 const Page = () => {
   return (
-    <Container padding={8}>
-      <Box textAlign={"center"} fontSize={"x-large"} fontWeight={"bold"}>
+    <>
+      <Box
+        textAlign={"center"}
+        fontSize={"xx-large"}
+        fontWeight={"bold"}
+        color={"#4c98b4"}
+      >
         今月あなたに届く商品はこちらです！！
       </Box>
       <Card marginTop={6}>
@@ -53,7 +58,7 @@ const Page = () => {
           </Button>
         </CardFooter>
       </Card>
-    </Container>
+    </>
   );
 };
 export default Page;
