@@ -31,6 +31,7 @@ function PriceWrapper(props: Props) {
       alignSelf={{ base: "center", lg: "flex-start" }}
       borderColor={useColorModeValue("gray.200", "gray.500")}
       borderRadius={"xl"}
+      width="300px"
     >
       {children}
     </Box>
@@ -43,9 +44,9 @@ export default function ThreeTierPricing() {
       name: "お手軽プラン",
       price: "3,000",
       features: [
-        "unlimited build minutes",
-        "Lorem, ipsum dolor.",
-        "5TB Lorem, ipsum dolor.",
+        "家電1台が家に届く！",
+        "交換は2ヶ月に1回まで可能",
+        "スタンダード家電ラインナップ",
       ],
     },
     {
@@ -53,18 +54,18 @@ export default function ThreeTierPricing() {
       price: "5,000",
       appeal: "一番人気",
       features: [
-        "unlimited build minutes",
-        "Lorem, ipsum dolor.",
-        "5TB Lorem, ipsum dolor.",
+        "家に届く家電の数を2台まで選択可能！",
+        "毎月交換可能",
+        "スタンダード家電ラインナップ",
       ],
     },
     {
       name: "豪華プラン",
       price: "10,000",
       features: [
-        "unlimited build minutes",
-        "Lorem, ipsum dolor.",
-        "5TB Lorem, ipsum dolor.",
+        "家に届く家電の数を3台まで選択可能！",
+        "毎月交換可能",
+        "プレミアム家電ラインナップ",
       ],
     },
   ];
