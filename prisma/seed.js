@@ -4,7 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const csvParser = require('csv-parser');
 
-const csvFilePath = path.join(__dirname, 'data/test.csv');
+// 全データが入ったファイル: all_data.csv
+// こちらはinitialPriceのスキーマ変更を反映させてnullableにしないと全部のレコードが登録されません
+const csvFilePath = path.join(__dirname, 'data/all_data.csv');
 const items = [];
 
 fs.createReadStream(csvFilePath)
