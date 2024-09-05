@@ -53,8 +53,8 @@ const Navbar = () => {
           </Flex>
           <Flex align={"center"}>
             {status === "unauthenticated" ? (
-              <Button as={Link} href="/signup">
-                新規登録
+              <Button as={Link} href="/signin">
+                ログイン
               </Button>
             ) : "loading" ? (
               <Skeleton
