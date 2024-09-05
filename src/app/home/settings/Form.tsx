@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FormControl,
   FormLabel,
@@ -11,20 +11,43 @@ import {
   Radio,
 } from "@chakra-ui/react";
 
+// Gender enumの定義
+const Gender = {
+  MALE: "MALE",
+  FEMALE: "FEMALE",
+  OTHER: "OTHER",
+};
+
 function MultiForm() {
   const [formData, setFormData] = useState({
     name: "",
+    password: "",
+    email: "",
     year: "",
     month: "",
     day: "",
-    sex: "",
+    gender: "",
     age: "",
   });
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  // 入力内容をチェックしてフォームが有効かどうかを判断する
+  useEffect(() => {
+    const { name, email, year, month, day, gender, age } = formData;
+    if (name && email && year && month && day && gender && age) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [formData]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+
+  
 
   const handleGenderChange = (value: string) => {
     setFormData((prevData) => ({ ...prevData, gender: value }));
@@ -32,7 +55,7 @@ function MultiForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert(`名前: ${formData.name},  性別: ${formData.sex}, 年齢: ${formData.age}, 生年月日: ${formData.year}-${formData.month}-${formData.day}`);
+    alert(`名前: ${formData.name}, パスワード:${formData.password},メール: ${formData.email}, 性別: ${formData.gender}, 年齢: ${formData.age}, 生年月日: ${formData.year}-${formData.month}-${formData.day}`);
   };
 
   const generateYears = () => {
@@ -54,7 +77,7 @@ function MultiForm() {
 
   const generateAges = () => {
     const ages = [];
-    for (let i = 0; i <= 100; i++) {
+    for (let i = 18; i <= 100; i++) {
       ages.push(i);
     }
     return ages;
@@ -74,15 +97,36 @@ function MultiForm() {
           />
         </FormControl>
 
+        {/* パスワード入力 */}
+        <FormControl>
+          <FormLabel>パスワード</FormLabel>
+          <Input
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+            placeholder="パスワードを入力"
+          />
+        </FormControl>
+        {/* メール入力 */}
+        <FormControl>
+          <FormLabel>メールアドレス</FormLabel>
+          <Input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="メールアドレスを入力"
+          />
+        </FormControl>
 
-        {/* 性別選択 */}
+        {/* 性別選択 (enum Genderを使用) */}
         <FormControl>
           <FormLabel>性別</FormLabel>
-          <RadioGroup onChange={handleGenderChange} value={formData.sex}>
+          <RadioGroup onChange={handleGenderChange} value={formData.gender}>
             <HStack spacing={4}>
-              <Radio value="男性">男性</Radio>
-              <Radio value="女性">女性</Radio>
-              <Radio value="その他">その他</Radio>
+              <Radio value={Gender.MALE}>男性</Radio>
+              <Radio value={Gender.FEMALE}>女性</Radio>
+              <Radio value={Gender.OTHER}>その他</Radio>
             </HStack>
           </RadioGroup>
         </FormControl>
@@ -148,8 +192,9 @@ function MultiForm() {
         </FormControl>
 
         {/* 送信ボタン */}
-        <Button type="submit" colorScheme="teal">
+        <Button type="submit" colorScheme="teal" isDisabled={!isFormValid}>
           送信
+
         </Button>
       </VStack>
     </form>
