@@ -1,5 +1,6 @@
 "use client";
 import ItemCard from "@/components/ItemCard";
+import ImageGrid from "@/components/ImageGrid";
 import {
   Container,
   Button,
@@ -12,7 +13,7 @@ import {
   ModalCloseButton,
   ModalFooter,
   Box,
-  Image,
+  Stack,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Link from "next/link";
@@ -22,26 +23,14 @@ type GachaItem = {
   id: string;
 };
 
-const bounceAnimation = `
-  @keyframes bounce {
-    0% {
-    transform: translateY(0) scaleY(1);
-  }
-  50% {
-    transform: translateY(-10px) scaleY(1.1);
-  }
-  100% {
-    transform: translateY(0) scaleY(1);
-  }
-  }
-`;
-
 const GachaModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [isPlayingVideo, setIsPlayingVideo] = useState<boolean>(false); // 動画再生中かどうか
   const [showItem, setShowItem] = useState<boolean>(false); // アイテム（画像）を表示するかどうか
   const [items, setItems] = useState<{ name: string; id: string }[]>([]); // ガチャアイテム
+  const [showImageGrid, setShowImageGrid] = useState<boolean>(true); // 画像グリッドの表示状態
 
   const handleGacha = () => {
+    setShowImageGrid(false); // ガチャボタンを押したら画像グリッドを非表示
     setIsPlayingVideo(true);
     setShowItem(false); 
     setTimeout(() => {
@@ -60,21 +49,12 @@ const GachaModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         <ModalCloseButton />
         <ModalBody>
           <Container bgColor={"#D9D9D9"} p={4} borderRadius={"20px"}>
-            <Center>
+            <Stack spacing={4} align="center" mb={4}>
+              {showImageGrid && <ImageGrid />} {/* 画像グリッドの表示状態に基づいてレンダリング */}
+
               {!isPlayingVideo && !showItem && (
-                <Box display="flex" flexDirection="column" alignItems="center" minHeight="300px" justifyContent="center">
-                  <style>
-                    {bounceAnimation}
-                  </style>
-                  <Image
-                    src="/gacha.png"
-                    alt="Gacha"
-                    boxSize="200px"
-                    objectFit="contain"
-                    mb={5}
-                    animation="bounce 2s infinite"
-                  />
-                  <Button mx="auto" onClick={handleGacha} bgColor="red" color="white" _hover={{ bgColor: "#D9D9D9" }}>
+                <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+                  <Button onClick={handleGacha} bgColor="red" color="white" _hover={{ bgColor: "#D9D9D9" }} p={4}>
                     ガチャをする
                   </Button>
                 </Box>
@@ -90,12 +70,12 @@ const GachaModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
               )}
 
               {showItem && items.map((item) => <ItemCard key={item.id} name={item.name} />)}
-            </Center>
+            </Stack>
           </Container>
         </ModalBody>
 
         {showItem && (
-          <ModalFooter flexDir={"column"}>
+          <ModalFooter flexDir={"column"} gap={4}>
             <Button colorScheme="blue" w={"full"} onClick={handleGacha}>
               もう一度
             </Button>
