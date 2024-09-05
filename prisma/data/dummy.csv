@@ -1,0 +1,5 @@
+name,category,url,imageUrl,initialPrice,monthlyPrice,overview,detail
+GoPro2,camera,https://rental.kikito.docomo.ne.jp/rental/devices/GP000790/,https://contents.kikito.docomo.ne.jp/contents/devices/GP000790/thumbnail/thumbnail.png,2150,4300,overview-ex,detail-ex
+Item1,Category1,http://example.com/image1.jpg,http://example.com/image1.jpg,1000,100,Overview1,Detail1
+Item2,Category2,http://example.com/image2.jpg,http://example.com/image2.jpg,1500,150,Overview2,Detail2
+GoPro,camera,https://rental.kikito.docomo.ne.jp/rental/devices/GP000790/,https://contents.kikito.docomo.ne.jp/contents/devices/GP000790/thumbnail/thumbnail.png,2150,4300,overview-ex,detail-ex
