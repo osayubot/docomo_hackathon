@@ -128,7 +128,7 @@ const Testimonial = () => {
             </TestimonialContent>
             <TestimonialAvatar
               src={
-                "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+                "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgenhQQnD0ONAMHLSSnM7vf3lhnR5sCdjBrZUiJy8rSHEWBN0KjJ1nmOM6esfJVnUAOGnZ1vnN0evWui61qbpZoi7-B0wrpHuAprHo6ueZy5dqRELzuXKkRad1bJ5ggNcGuIIjhVz0qlBI/s800/youngman_25.png"
               }
               nickname={"たなかさん（仮）"}
               age={"20代"}
@@ -145,7 +145,7 @@ const Testimonial = () => {
             </TestimonialContent>
             <TestimonialAvatar
               src={
-                "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+                "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2Mw8_TLSo4hWJoT2b_1jsPrvXkiKdNIAL8a44rMNZyzmg1Y0K9wHRpUieraf3Giscqa-mPhq5Lph53ZkaiGtx6Yi2yNxeiIOY1x8xsGwW_1TMxufZe4iVVsJmwgVaCgKA8JkYzGUQ_yU/s170/man_55.png"
               }
               nickname={"さとうさん（仮）"}
               age={"30代"}
@@ -162,7 +162,7 @@ const Testimonial = () => {
             </TestimonialContent>
             <TestimonialAvatar
               src={
-                "https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+                "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpzsjanHKFPDVsakBxXoRZCbfQ3uE-k4XmxP3KIj-yYX5_li_KBybg3dxStC_tTwNU9xQaviDYhD3dtTI9cPXJ9JSMB-eFw4ydtztSGJxZa_wgifn5hHFdYwylZUIAbClgaNDfOPsZ8dw/s170/woman_72.png"
               }
               nickname={"すずきさん（仮）"}
               age={"40代"}
