@@ -25,7 +25,7 @@ enum Gender {
   FEMALE
   OTHER
 }
-model USER {
+model users {
   id        Int      @id @unique @default(autoincrement())
   name      String   @db.VarChar(256)
   age       Int
@@ -37,7 +37,7 @@ model USER {
   updatedAt DateTime @updatedAt
 }
 
-model ITEM {
+model items {
   id        Int      @id @unique @default(autoincrement())
   name      String   @db.VarChar(256)
   category  String   @db.VarChar(128)
@@ -51,7 +51,7 @@ model ITEM {
 
 // orderのステータス管理はisreturnedだけでいい？
 // userIdとitemIdはrelationを宣言する必要ある？
-model ORDER {
+model orders {
   orderid   Int      @id @unique @default(autoincrement())
   userId    Int
   itemID    Int

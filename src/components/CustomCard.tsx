@@ -1,13 +1,4 @@
-import {
-  Button,
-  CardBody,
-  CardFooter,
-  Heading,
-  Stack,
-  Image,
-  Card,
-  Text,
-} from "@chakra-ui/react";
+import { CardBody, Heading, Stack, Image, Card, Text } from "@chakra-ui/react";
 
 const CustomCard = ({
   title,
