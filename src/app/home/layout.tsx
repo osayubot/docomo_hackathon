@@ -5,7 +5,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <NavigationTab />
-      <Container>{children}</Container>
+      <Container maxWidth={"1024px"}>{children}</Container>
     </>
   );
 }

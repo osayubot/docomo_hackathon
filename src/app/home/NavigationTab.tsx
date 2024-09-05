@@ -16,8 +16,14 @@ const NavigationTab = () => {
       : -1;
 
   return (
-    <Tabs isFitted defaultIndex={tabIndex}>
-      <TabList mb="1em">
+    <Tabs
+      isFitted
+      defaultIndex={tabIndex}
+      marginY={10}
+      maxW={"5xl"}
+      marginX={"auto"}
+    >
+      <TabList>
         <Tab cursor={"pointer"} as={Link} href="/home">
           今月の商品
         </Tab>
