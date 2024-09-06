@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
 
   // パスワードをハッシュ化してユーザーを作成
   const hashedPassword = await bcrypt.hash(password, 10);
-  await prisma.user.create({
+  await prisma.users.create({
     data: {
       email: email,
       password: hashedPassword,

@@ -29,7 +29,9 @@ export default function RecommendCategory() {
 
   return (
     <div>
+      <button onClick={async () => {}}>prismaクリック</button>
       <h1>おすすめのカテゴリを取得する</h1>
+
       <form onSubmit={handleSubmit}>
         <div>
           <label>性別:</label>

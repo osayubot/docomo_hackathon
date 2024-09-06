@@ -1,20 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `ITEM` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `ORDER` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `USER` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE `ITEM`;
-
--- DropTable
-DROP TABLE `ORDER`;
-
--- DropTable
-DROP TABLE `USER`;
-
 -- CreateTable
 CREATE TABLE `Users` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
@@ -39,8 +22,8 @@ CREATE TABLE `Items` (
     `category` VARCHAR(128) NOT NULL,
     `url` VARCHAR(512) NOT NULL,
     `imageUrl` VARCHAR(512) NOT NULL,
-    `initialPrice` DECIMAL(10, 2) NOT NULL,
-    `monthlyPrice` DECIMAL(10, 2) NOT NULL,
+    `initialPrice` DECIMAL(10, 0) NULL,
+    `monthlyPrice` DECIMAL(10, 0) NOT NULL,
     `overview` TEXT NOT NULL,
     `detail` TEXT NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
