@@ -35,14 +35,16 @@ const Page = () => {
 
   //登録処理
   const onSubmit = async () => {
-    const res = await fetch("/api/signUp", {
+    const res = await fetch("/api/auth/signup", {
       body: JSON.stringify({ email, password }),
       headers: { "Content-type": "application/json" },
       method: "POST",
     });
     if (res.ok) {
-      signIn("credentials", { email: email, password: password });
-      router.push("/home");
+      signIn("credentials", {
+        email: email,
+        password: password,
+      });
     } else {
       const resError = await res.json();
       setError(resError.errors);
@@ -83,7 +85,10 @@ const Page = () => {
                 <Text>{error}</Text>
               </Stack>
               <Center>
-                <Link href="/signin" style={{ textDecoration: "underline" }}>
+                <Link
+                  href="/auth/signin"
+                  style={{ textDecoration: "underline" }}
+                >
                   ログインはこちら
                 </Link>
               </Center>

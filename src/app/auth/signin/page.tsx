@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { validationLoginSchema } from "@/libs/validationSchema";
+
 import {
   Flex,
   Box,
@@ -29,22 +30,29 @@ const Page = () => {
   const [error, setError] = useState<string>("");
 
   //セッション判定
-  if (session) redirect("/");
+  if (session) redirect("/home");
 
-  const onSubmit = async (data: any) => {
-    const email = data.email;
-    const password = data.password;
-    const res = await fetch("/api/signIn", {
-      body: JSON.stringify(data),
-      headers: { "Content-type": "application/json" },
-      method: "POST",
+  const onSubmit = async () => {
+    // const res = await fetch("/api/auth/sigin", {
+    //   body: JSON.stringify(data),
+    //   headers: { "Content-type": "application/json" },
+    //   method: "POST",
+    // });
+    // if (res.ok) {
+    const res = await signIn("credentials", {
+      email: email,
+      password: password,
+      callbackUrl: "/home",
     });
-    if (res.ok) {
-      signIn("credentials", { email: email, password: password });
-    } else {
-      const resError = await res.json();
-      setError(resError.errors);
-    }
+    // if (res?.ok) {
+    //   // redirect("/home");
+    // } else {
+    //   setError("ログインに失敗しました");
+    // }
+    // } else {
+    //   const resError = await res.json();
+    //   setError(resError.errors);
+    // }
   };
   return (
     <>
@@ -82,7 +90,10 @@ const Page = () => {
                 <Text colorScheme="red">{error}</Text>
               </Stack>
               <Center>
-                <Link href="/signup" style={{ textDecoration: "underline" }}>
+                <Link
+                  href="/auth/signup"
+                  style={{ textDecoration: "underline" }}
+                >
                   新規登録はこちら
                 </Link>
               </Center>

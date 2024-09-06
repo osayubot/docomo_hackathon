@@ -53,21 +53,11 @@ const Navbar = () => {
           </Flex>
           <Flex align={"center"}>
             {status === "unauthenticated" ? (
-              <Button as={Link} href="/signup">
-                新規登録
+              <Button as={Link} href="/auth/signin">
+                ログイン
               </Button>
-            ) : "loading" ? (
-              <Skeleton
-                variant="text"
-                animation="wave"
-                width={175}
-                height={25}
-              />
             ) : (
-              <Flex>
-                <Avatar src="/girl.png" />
-                <Text>{session?.user?.name}</Text>
-              </Flex>
+              <Button onClick={() => signOut()}>ログアウト</Button>
             )}
           </Flex>
         </Container>
